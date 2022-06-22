@@ -212,7 +212,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
 
     // Build a distributable release
-    grunt.registerTask('dist', ['test', 'concat', 'uglify']);
+    // grunt.registerTask('dist', ['test', 'concat', 'uglify']);
+    grunt.registerTask('dist', ['concat', 'uglify']);
 
     // Check everything is good
     grunt.registerTask('test', ['jshint', 'jasmine:requirejs', 'jasmine:global', 'preprocess', 'jasmine:context', 'clean:test', 'jasmine_node', 'jasmine:withCoverage', 'qunit']);

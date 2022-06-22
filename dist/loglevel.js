@@ -1,4 +1,4 @@
-/*! loglevel - v1.8.0 - https://github.com/pimterry/loglevel - (c) 2021 Tim Perry - licensed MIT */
+/*! loglevel - v1.8.1 - https://github.com/pimterry/loglevel - (c) 2022 Tim Perry - licensed MIT */
 (function (root, definition) {
     "use strict";
     if (typeof define === 'function' && define.amd) {
@@ -59,7 +59,7 @@
     // Build the best logging method possible for this env
     // Wherever possible we want to bind, not wrap, to preserve stack traces
     function realMethod(methodName) {
-        if (methodName === 'debug') {
+        if (methodName === 'debug' && Logger.SET_DEBUG_TO_LOG) {
             methodName = 'log';
         }
 
@@ -246,6 +246,10 @@
           initialLevel = defaultLevel;
       }
       self.setLevel(initialLevel, false);
+
+      self.setDebugOverride = function(shouldOverride) {
+        Logger.SET_DEBUG_TO_LOG = shouldOverride;
+      };
     }
 
     /*
@@ -253,6 +257,8 @@
      * Top-level API
      *
      */
+
+    Logger.SET_DEBUG_TO_LOG = true;
 
     var defaultLogger = new Logger();
 
